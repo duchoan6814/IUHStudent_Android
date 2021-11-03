@@ -7,7 +7,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConfig.background,
+      backgroundColor: Colors.white,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -35,7 +35,7 @@ class LoginPage extends StatelessWidget {
                 const Text(
                   "LOGIN",
                   style: TextStyle(
-                    color: ColorConfig.textColor,
+                    color: ColorConfig.character,
                     fontWeight: FontWeight.bold,
                     fontSize: 28.0
                   ),
@@ -44,7 +44,7 @@ class LoginPage extends StatelessWidget {
                   decoration: InputDecoration(
                     labelText: "USERNAME",
                     labelStyle: TextStyle(
-                      color: ColorConfig.textColorLight,
+                      color: ColorConfig.character,
                       fontSize: 15.0
                     )
                   ),
@@ -54,7 +54,7 @@ class LoginPage extends StatelessWidget {
                   decoration: InputDecoration(
                     labelText: "PASSWORD",
                     labelStyle: TextStyle(
-                      color: ColorConfig.textColorLight,
+                      color: ColorConfig.character,
                       fontSize: 15.0
                     )
                   ),
