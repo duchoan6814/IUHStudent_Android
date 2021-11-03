@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ColorConfig {
-  static const Color primary = Color(0xFF3EC3DB);
-  static const Color accent = Color(0xFFF26943);
-  static const Color warning = Color(0xFFEE5253);
-  static const Color orange = Color(0xFFF39F20);
-  static const Color green = Color(0xFF33C880);
-  static const Color tail = Color(0xFF01A3A4);
-  static const Color blue = Color(0xFF0075FF);
-  static const Color indigo = Color(0xFF6A3ACF);
-  static const Color grey = Color(0xFF8395A7);
-
-  static const Color textColor = Color(0xFF0C173C);
-  static const Color textColorLight = Color(0xB30C173C);
-
-  static const Color background = Color(0xFFF1F5FB);
+  static const Color primary = Color(0xFF76A6EF);
+  static const Color character = Color(0xFF6E7780);
+  static const Color orange = Color(0xFFFDE186);
+  static const Color orangeBackground = Color(0xFFFEF0C2);
+  static const Color orangeCharacter = Color(0xFFF0BA3C);
+  static const Color red = Color(0xFFF07C91);
+  static const Color redLight = Color(0xFFFEBBD5);
 }
