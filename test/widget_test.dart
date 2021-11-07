@@ -6,17 +6,41 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
 import 'package:iuh_student/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await initHiveForFlutter();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
+    final HttpLink httpLink = HttpLink(
+      'http://18.136.126.228/graphql',
+    );
+
+    final storage = new FlutterSecureStorage();
+    String? token = await storage.read(key: "__access__token__");
+
+    final AuthLink authLink = AuthLink(
+      getToken: () async => 'Bearer ${token}',
+      // OR
+      // getToken: () => 'Bearer <YOUR_PERSONAL_ACCESS_TOKEN>',
+    );
+
+    final Link link = authLink.concat(httpLink);
+
+    await tester.pumpWidget(MyApp(client: ValueNotifier(
+      GraphQLClient(
+        link: link,
+        // The default store is the InMemoryStore, which does NOT persist to disk
+        cache: GraphQLCache(store: HiveStore()),
+      ),)));
+
+        // Verify that our counter starts at 0.
+        expect(find.text('0'), findsOneWidget);
     expect(find.text('1'), findsNothing);
 
     // Tap the '+' icon and trigger a frame.
@@ -25,6 +49,8 @@ void main() {
 
     // Verify that our counter has incremented.
     expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('1'),
+    findsOneWidget
+    );
   });
 }
