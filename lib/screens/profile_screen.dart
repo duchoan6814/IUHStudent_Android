@@ -36,7 +36,7 @@ class ProfileScreen extends StatelessWidget {
                 child: CircleAvatar(
                   radius: 50.0,
                   backgroundImage:
-                      CachedNetworkImageProvider(currentAccount.student.avatar),
+                      CachedNetworkImageProvider(currentAccount.student.avatar ?? ''),
                 ),
                 backgroundColor: Colors.white,
                 radius: 55.0,
