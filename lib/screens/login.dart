@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:iuh_student/config/color_config.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iuh_student/screens/screens.dart';
+import 'package:iuh_student/utils/global_storage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -34,7 +34,6 @@ class _LoginPageState extends State<LoginPage> {
       }
     """;
 
-    final storage = new FlutterSecureStorage();
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -110,16 +109,16 @@ class _LoginPageState extends State<LoginPage> {
                         return;
                       }
 
-                      var token = resultData?["login"]?["data"]?["token"];
-                      await storage.write(
-                          key: "__access__token__", value: token);
+                      final token = resultData?["login"]?["data"]?["token"];
 
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MainScreeen()));
+                      await GlobalStorage.setToken(token);
 
-                      print(resultData);
+                      WidgetsBinding.instance!.addPostFrameCallback((_) async {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MainScreeen()));
+                      });
                     },
                   ),
                   builder: (
