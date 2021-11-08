@@ -49,7 +49,7 @@ class _MainScreeenState extends State<MainScreeen> {
         print(result.data?["getProfile"]?["data"]);
         currentStudent = result.data?["getProfile"]?["data"];
         return Scaffold(
-          body: screens[currentScreen],
+          body: SafeArea(child: screens[currentScreen]),
           bottomNavigationBar: BottomNavigationBar(
             onTap: (index) =>
                 setState(() {
