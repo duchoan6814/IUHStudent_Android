@@ -11,33 +11,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 import 'package:iuh_student/main.dart';
+import 'package:iuh_student/utils/global_storage.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await initHiveForFlutter();
 
-    final HttpLink httpLink = HttpLink(
-      'http://18.136.126.228/graphql',
-    );
 
-    final storage = new FlutterSecureStorage();
-    String? token = await storage.read(key: "__access__token__");
 
-    final AuthLink authLink = AuthLink(
-      getToken: () async => 'Bearer ${token}',
-      // OR
-      // getToken: () => 'Bearer <YOUR_PERSONAL_ACCESS_TOKEN>',
-    );
-
-    final Link link = authLink.concat(httpLink);
-
-    await tester.pumpWidget(MyApp(client: ValueNotifier(
-      GraphQLClient(
-        link: link,
-        // The default store is the InMemoryStore, which does NOT persist to disk
-        cache: GraphQLCache(store: HiveStore()),
-      ),)));
+    await tester.pumpWidget(MyApp());
 
         // Verify that our counter starts at 0.
         expect(find.text('0'), findsOneWidget);

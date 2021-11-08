@@ -4,6 +4,8 @@ import 'package:iuh_student/config/color_config.dart';
 import 'package:iuh_student/data.dart';
 import 'package:intl/intl.dart';
 import 'package:iuh_student/models/enums/bac_dao_tao.dart';
+import 'package:iuh_student/screens/login.dart';
+import 'package:iuh_student/utils/global_storage.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -15,6 +17,11 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Function handleButtonLogout = () async {
+      await GlobalStorage.deleteToken();
+      Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+    };
+
     return Column(
       children: [
         Container(
@@ -120,7 +127,7 @@ class ProfileScreen extends StatelessWidget {
                 height: 20.0,
               ),
               ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () {handleButtonLogout();},
                 icon: Icon(Icons.logout, color: ColorConfig.red, size: 30.0,),
                 label: Text(
                   "Đăng xuất",

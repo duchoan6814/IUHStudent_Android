@@ -39,6 +39,7 @@ dependencies:
   graphql_flutter: ^5.0.0
   flutter_secure_storage: ^4.2.1
   fluttertoast: ^8.0.8
+  stateprovider: ^0.5.1
 
 dev_dependencies:
   flutter_test:
