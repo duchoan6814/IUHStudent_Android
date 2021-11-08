@@ -40,6 +40,7 @@ dependencies:
   flutter_secure_storage: ^4.2.1
   fluttertoast: ^8.0.8
   stateprovider: ^0.5.1
+  syncfusion_flutter_charts: ^19.3.48
 
 dev_dependencies:
   flutter_test:

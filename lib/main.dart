@@ -9,13 +9,11 @@ void main() async {
   // so we need to initialize Hive.
   await initHiveForFlutter();
 
-
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-
-  const MyApp({Key? key }) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,27 +44,25 @@ class MyApp extends StatelessWidget {
     return GraphQLProvider(
       client: client,
       child: MaterialApp(
-        title: 'IUH Student',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: SafeArea(
-            child: Query(
-          options: QueryOptions(
-            document: gql(getProfileQuery),
-            pollInterval: Duration(seconds: 10),
+          title: 'IUH Student',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
           ),
-          builder: (QueryResult result,
-              {VoidCallback? refetch, FetchMore? fetchMore}) {
-            if (result.hasException) {
-              handleDeleteStorage();
-              return LoginPage();
-            }
-            return MainScreeen();
-          },
-        )),
-      ),
+          home: Query(
+            options: QueryOptions(
+              document: gql(getProfileQuery),
+              pollInterval: Duration(seconds: 10),
+            ),
+            builder: (QueryResult result,
+                {VoidCallback? refetch, FetchMore? fetchMore}) {
+              if (result.hasException) {
+                handleDeleteStorage();
+                return LoginPage();
+              }
+              return MainScreeen();
+            },
+          )),
     );
   }
 }
