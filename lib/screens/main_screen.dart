@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:iuh_student/queries/queries.dart';
+import 'package:iuh_student/storage/context.dart';
 import 'package:iuh_student/utils/global_storage.dart';
 import 'screens.dart';
 
@@ -44,6 +45,9 @@ class _MainScreeenState extends State<MainScreeen> {
             Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
           });
         }
+
+        print(result.data?["getProfile"]?["data"]);
+        currentStudent = result.data?["getProfile"]?["data"];
         return Scaffold(
           body: screens[currentScreen],
           bottomNavigationBar: BottomNavigationBar(

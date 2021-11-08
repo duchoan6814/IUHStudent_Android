@@ -1,10 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:iuh_student/config/color_config.dart';
-import 'package:iuh_student/data.dart';
 import 'package:intl/intl.dart';
-import 'package:iuh_student/models/enums/bac_dao_tao.dart';
 import 'package:iuh_student/screens/login.dart';
+import 'package:iuh_student/storage/context.dart';
 import 'package:iuh_student/utils/global_storage.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -43,7 +42,7 @@ class ProfileScreen extends StatelessWidget {
                 child: CircleAvatar(
                   radius: 50.0,
                   backgroundImage:
-                      CachedNetworkImageProvider(currentAccount.student.avatar ?? ''),
+                      CachedNetworkImageProvider(currentStudent["image"] ?? ''),
                 ),
                 backgroundColor: Colors.white,
                 radius: 55.0,
@@ -56,22 +55,22 @@ class ProfileScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    currentAccount.student.hoTenDem +
+                    currentStudent?["hoTenDem"] +
                         " " +
-                        currentAccount.student.ten,
+                        currentStudent?["ten"],
                     style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 25),
                   ),
                   SizedBox(height: 10.0,),
-                  Text("Ngày sinh: ${DateFormat("dd/MM/yyyy").format(currentAccount.student.ngaySinh)}", style: styleAtributeOfStudent,),
+                  Text("Ngày sinh: ${DateFormat("dd/MM/yyyy").format(currentStudent?["ngaySinh"] ?? DateTime.now())}", style: styleAtributeOfStudent,),
                   SizedBox(height: 10.0,),
-                  Text("HSSV: ${currentAccount.student.maSinhVien}", style: styleAtributeOfStudent,),
+                  Text("MSSV: ${currentStudent?["maSinhVien"]}", style: styleAtributeOfStudent,),
                   SizedBox(height: 10.0,),
-                  Text("Bậc đào tạo: ${currentAccount.student.bacDaoTao.name}", style: styleAtributeOfStudent,),
+                  Text("Bậc đào tạo: ${currentStudent?["bacDaoTao"]}", style: styleAtributeOfStudent,),
                   SizedBox(height: 10.0,),
-                  Text("Lớp: DHTKPM14BTT}", style: styleAtributeOfStudent,)
+                  Text("Lớp: DHTKPM14BTT", style: styleAtributeOfStudent,)
                 ],
               )
             ],
