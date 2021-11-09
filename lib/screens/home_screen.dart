@@ -94,16 +94,22 @@ class _HomeScreenState extends State<HomeScreen> {
               border: TableBorder.all(),
               children: [
                 TableRow(children: [
-                  Text(
-                    "Môn học",
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Môn học",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20.0),
+                    ),
                   ),
-                  Text(
-                    "Tín chỉ",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20.0,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Tín chỉ",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0,
+                      ),
                     ),
                   )
                 ]),
@@ -184,8 +190,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 )
               ],
             ),
-            SfCircularChart(series: <CircularSeries>[
+            SfCircularChart(
+                legend: Legend(
+                  isVisible: true,
+                  overflowMode: LegendItemOverflowMode.wrap
+                ),
+                series: <CircularSeries>[
               RadialBarSeries<DiemTrungBinhData, String>(
+                  maximumValue: _tienDoHocTapData[1].diemSo.toDouble(),
+                  radius: '100%',
+                  gap: '3%',
+                  dataLabelSettings: DataLabelSettings(isVisible: true),
+                  enableTooltip: true,
                   dataSource: _tienDoHocTapData,
                   xValueMapper: (DiemTrungBinhData exp, _) => exp.tenMonHoc,
                   yValueMapper: (DiemTrungBinhData exp, _) => exp.diemSo),
@@ -197,8 +213,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   List<DiemTrungBinhData> getTienDo = [
-    DiemTrungBinhData("Tong", 155),
     DiemTrungBinhData("Da xong", 70),
+    DiemTrungBinhData("Tong", 155),
   ];
 
   List<DiemTrungBinhData> getBarChartData = [
