@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:iuh_student/queries/queries.dart';
@@ -52,7 +54,6 @@ class MyApp extends StatelessWidget {
           home: Query(
             options: QueryOptions(
               document: gql(getProfileQuery),
-              pollInterval: Duration(seconds: 10),
             ),
             builder: (QueryResult result,
                 {VoidCallback? refetch, FetchMore? fetchMore}) {
