@@ -16,12 +16,9 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    handleDeleteStorage() async {
-      await GlobalStorage.deleteToken();
-    }
+
 
     final HttpLink httpLink = HttpLink(
       'http://18.136.126.228/graphql',
@@ -58,7 +55,6 @@ class MyApp extends StatelessWidget {
             builder: (QueryResult result,
                 {VoidCallback? refetch, FetchMore? fetchMore}) {
               if (result.hasException) {
-                handleDeleteStorage();
                 return LoginPage();
               }
               return MainScreeen();

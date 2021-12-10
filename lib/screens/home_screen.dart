@@ -35,10 +35,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     String dropdownValue = "HK1 2018 - 2019";
 
-    Function handleDeleteStorage = () async {
-      await GlobalStorage.deleteToken();
-    };
-
     return Query(
       options: QueryOptions(
         document: gql(getProfileQuery),
@@ -47,8 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
           { VoidCallback? refetch, FetchMore? fetchMore }) {
 
         if (result.hasException) {
+          print("result" + result.exception.toString());
           WidgetsBinding.instance!.addPostFrameCallback((_) async {
-            handleDeleteStorage();
             Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()));
           });
         }
