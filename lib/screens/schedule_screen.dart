@@ -249,7 +249,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                               ]),
                         );
                       },
-                      // body: Text("asdasdada"),
                       body: Container(
                         child: ListView.separated(
                             shrinkWrap: true,
