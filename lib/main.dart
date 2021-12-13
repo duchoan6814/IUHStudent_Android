@@ -48,18 +48,8 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: Query(
-            options: QueryOptions(
-              document: gql(getProfileQuery),
-            ),
-            builder: (QueryResult result,
-                {VoidCallback? refetch, FetchMore? fetchMore}) {
-              if (result.hasException) {
-                return LoginPage();
-              }
-              return MainScreeen();
-            },
-          )),
+          home: ScreenMain()
+      ),
     );
   }
 }
