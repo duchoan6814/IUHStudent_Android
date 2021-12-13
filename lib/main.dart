@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:iuh_student/queries/queries.dart';
@@ -14,12 +16,9 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    handleDeleteStorage() async {
-      await GlobalStorage.deleteToken();
-    }
+
 
     final HttpLink httpLink = HttpLink(
       'http://18.136.126.228/graphql',
@@ -52,12 +51,10 @@ class MyApp extends StatelessWidget {
           home: Query(
             options: QueryOptions(
               document: gql(getProfileQuery),
-              pollInterval: Duration(seconds: 10),
             ),
             builder: (QueryResult result,
                 {VoidCallback? refetch, FetchMore? fetchMore}) {
               if (result.hasException) {
-                handleDeleteStorage();
                 return LoginPage();
               }
               return MainScreeen();

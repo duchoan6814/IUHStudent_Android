@@ -41,6 +41,8 @@ dependencies:
   fluttertoast: ^8.0.8
   stateprovider: ^0.5.1
   syncfusion_flutter_charts: ^19.3.48
+  syncfusion_flutter_datepicker: ^19.3.56
+  expandable: ^5.0.1
 
 dev_dependencies:
   flutter_test:
