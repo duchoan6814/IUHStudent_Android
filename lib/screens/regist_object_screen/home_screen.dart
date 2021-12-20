@@ -2,12 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:iuh_student/config/color_config.dart';
-import 'package:iuh_student/queries/queries.dart';
-import 'package:iuh_student/screens/screens.dart';
-import 'package:iuh_student/storage/context.dart';
-import 'package:iuh_student/utils/global_storage.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
