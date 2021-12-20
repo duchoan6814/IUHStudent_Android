@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 
 
     final HttpLink httpLink = HttpLink(
-      'http://18.136.126.228/graphql',
+      'http://iuhstudent-be.tk/graphql',
     );
 
     final AuthLink authLink = AuthLink(
