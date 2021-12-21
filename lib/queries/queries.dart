@@ -1,3 +1,5 @@
+import 'get_lich_hoc.dart';
+
 String getProfileQuery = """
   query GET_PROFILE {
     getProfile {

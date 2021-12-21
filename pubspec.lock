@@ -181,6 +181,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.3.0"
+  flutter_easyloading:
+    dependency: "direct main"
+    description:
+      name: flutter_easyloading
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.3"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -195,6 +202,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.2.1"
+  flutter_spinkit:
+    dependency: transitive
+    description:
+      name: flutter_spinkit
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "5.1.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -281,7 +295,7 @@ packages:
       name: hive
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.0.4"
+    version: "2.0.5"
   http:
     dependency: transitive
     description:
@@ -337,7 +351,7 @@ packages:
       name: nm
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.4.1"
+    version: "0.4.2"
   normalize:
     dependency: transitive
     description:
@@ -510,21 +524,21 @@ packages:
       name: syncfusion_flutter_charts
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "19.3.57"
+    version: "19.4.38"
   syncfusion_flutter_core:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "19.3.57"
+    version: "19.4.38"
   syncfusion_flutter_datepicker:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_datepicker
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "19.3.57"
+    version: "19.4.38"
   synchronized:
     dependency: transitive
     description:

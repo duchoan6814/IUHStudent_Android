@@ -4,5 +4,5 @@ export 'regist_object_screen/home_screen.dart';
 export 'profile_screen.dart';
 export 'regist_object_screen.dart';
 export 'result_screen.dart';
-export 'schedule_screen.dart';
+export 'schedule_screen/schedule_screen.dart';
 export 'main.dart';
