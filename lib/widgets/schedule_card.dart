@@ -16,16 +16,16 @@ class ScheduleCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(scheduleItem["name"], style: TextStyle(
+          Text(scheduleItem["tenMonHoc"], style: TextStyle(
             color: ColorConfig.orangeCharacter,
             fontSize: 18.0,
             fontWeight: FontWeight.bold
           ),),
-          Text(scheduleItem["className"] + " - " + scheduleItem["subjectClassId"]),
-          Text("Tiết: " + scheduleItem["startAndEndTime"]),
-          Text("Phòng: " + scheduleItem["location"]),
-          Text("Giảng viên: " + scheduleItem["teacher"]),
-          Text("Ghi chú: " + scheduleItem["note"])
+          Text(scheduleItem["lopHocPhan"] + " - " + scheduleItem["tenLopHocPhan"]),
+          Text("Tiết: " + scheduleItem["tiet"]),
+          Text("Phòng: " + scheduleItem["phong"]),
+          Text("Giảng viên: " + scheduleItem["giangVien"]),
+          Text("Ghi chú: " + (scheduleItem["ghiChu"] ?? ""))
         ],
       ),
     );
