@@ -68,8 +68,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
         ..._schedule.sublist(index + 1)
       ];
 
-      print(_schedule);
-
       setState(() {
         listBool = _schedule;
       });
