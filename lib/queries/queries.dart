@@ -1,4 +1,5 @@
 import 'get_lich_hoc.dart';
+import 'get_diem.dart';
 
 String getProfileQuery = """
   query GET_PROFILE {
