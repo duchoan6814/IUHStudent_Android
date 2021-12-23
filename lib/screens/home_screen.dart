@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:iuh_student/config/color_config.dart';
+import 'package:iuh_student/queries/get_qua_trinh_hoc_tap.dart';
+import 'package:iuh_student/utils/graphql_config.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,7 +17,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late List<DiemTrungBinhData> _diemTrungBinhChartData;
   late List<DiemTrungBinhData> _diemCuaBanChartData;
-  late List<DiemTrungBinhData> _tienDoHocTapData;
+
+  late Future<dynamic> dataResTienDoHocTap;
 
   @override
   void initState() {
@@ -22,7 +26,19 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _diemTrungBinhChartData = getLineChartData;
     _diemCuaBanChartData = getBarChartData;
-    _tienDoHocTapData = getTienDo;
+    dataResTienDoHocTap = getTienDoHocTapQuery();
+  }
+
+  Future<dynamic> getTienDoHocTapQuery() async {
+    QueryOptions options = QueryOptions(
+      document: gql(getTienDoHocTap),
+    );
+
+    final result = await clientA.query(options);
+
+    var _data = result?.data?["getTienDoHocTap"]?["data"];
+
+    return _data;
   }
 
   @override
@@ -190,31 +206,48 @@ class _HomeScreenState extends State<HomeScreen> {
                 )
               ],
             ),
-            SfCircularChart(
-                legend: Legend(
-                    isVisible: true, overflowMode: LegendItemOverflowMode.wrap),
-                series: <CircularSeries>[
-                  RadialBarSeries<DiemTrungBinhData, String>(
-                      maximumValue: _tienDoHocTapData[1].diemSo.toDouble(),
-                      radius: '100%',
-                      gap: '3%',
-                      dataLabelSettings:
-                          const DataLabelSettings(isVisible: true),
-                      enableTooltip: true,
-                      dataSource: _tienDoHocTapData,
-                      xValueMapper: (DiemTrungBinhData exp, _) => exp.tenMonHoc,
-                      yValueMapper: (DiemTrungBinhData exp, _) => exp.diemSo),
-                ])
+            FutureBuilder(
+                future: dataResTienDoHocTap,
+                builder:
+                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text('Error: ${snapshot.error}');
+                  } else {
+                    final _dataTienDoHocTap = snapshot?.data ?? {};
+
+                    TienDoHocTapData _tongTinChi = TienDoHocTapData("Tổng số tín chỉ", _dataTienDoHocTap["tongTinChi"]);
+                    TienDoHocTapData _tinChiDatDuoc = TienDoHocTapData("Tín chỉ đạt được", _dataTienDoHocTap["tinChiDatDuoc"]);
+
+                    return SfCircularChart(
+                        legend: Legend(
+                            isVisible: true,
+                            overflowMode: LegendItemOverflowMode.wrap),
+                        series: <CircularSeries>[
+                          RadialBarSeries<TienDoHocTapData, String>(
+                              maximumValue:
+                                  _dataTienDoHocTap["tongTinChi"].toDouble(),
+                              radius: '100%',
+                              gap: '3%',
+                              dataLabelSettings:
+                                  const DataLabelSettings(isVisible: true),
+                              enableTooltip: true,
+                              dataSource: [_tinChiDatDuoc, _tongTinChi],
+                              xValueMapper: (TienDoHocTapData exp, _) =>
+                                  exp.key,
+                              yValueMapper: (TienDoHocTapData exp, _) =>
+                                  exp.value),
+                        ]);
+                  }
+                })
           ],
         ),
       ),
     );
   }
-
-  List<DiemTrungBinhData> getTienDo = [
-    DiemTrungBinhData("Da xong", 70),
-    DiemTrungBinhData("Tong", 155),
-  ];
 
   List<DiemTrungBinhData> getBarChartData = [
     DiemTrungBinhData("toán cao cấp", 9),
@@ -229,6 +262,13 @@ class _HomeScreenState extends State<HomeScreen> {
     DiemTrungBinhData("Những nguyên lý cơ bản của chủ nghĩa Mac-lenin", 10),
     DiemTrungBinhData("Lập trình thiết bị di động", 6),
   ];
+}
+
+class TienDoHocTapData {
+  final String key;
+  final int value;
+
+  TienDoHocTapData(this.key, this.value);
 }
 
 class DiemTrungBinhData {
