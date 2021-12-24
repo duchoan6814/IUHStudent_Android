@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late List<DiemTrungBinhData> _diemTrungBinhChartData;
   late List<DiemTrungBinhData> _diemCuaBanChartData;
   late TooltipBehavior tooltip;
-  late final dropdownValue;
+  String? dropdownValue;
 
   late Future<dynamic> dataResTienDoHocTap;
   late Future<dynamic> dataResHocKy;
@@ -39,6 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<dynamic> getTienDoHocTapQuery() async {
     QueryOptions options = QueryOptions(
+      fetchPolicy: FetchPolicy.networkOnly,
       document: gql(getTienDoHocTap),
     );
 
@@ -51,6 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<dynamic> getHocKyQuery() async {
     QueryOptions options = QueryOptions(
+      fetchPolicy: FetchPolicy.networkOnly,
       document: gql(getHocKySimple),
     );
 
@@ -59,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var _data = result?.data?["getHocKySimple"]?["data"];
 
     setState(() {
-      dropdownValue = _data?[_data?.length - 1];
+      dropdownValue = _data?[_data?.length - 1]["hocKyId"];
       dataResKetQuaHocTap =
           getKetQuaHocTapQuery(_data?[_data?.length - 1]?["hocKyId"]);
     });
@@ -76,6 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<dynamic> getKetQuaHocTapQuery(hocKyId) async {
     QueryOptions options = QueryOptions(
+      fetchPolicy: FetchPolicy.networkOnly,
         document: gql(getKetQuaHocTap), variables: {"hocKyId": hocKyId});
 
     final result = await clientA.query(options);
@@ -118,10 +121,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   color: ColorConfig.character),
                             ),
                             DropdownButton(
-                              value: dropdownValue == null
-                                  ? _listHocKy[_listHocKy?.length - 1]
-                                      ["hocKyId"]
-                                  : dropdownValue["hocKyId"],
+                              value: dropdownValue ?? _listHocKy[_listHocKy?.length - 1]
+                                      ["hocKyId"],
                               icon: const Icon(Icons.arrow_downward),
                               iconSize: 24,
                               elevation: 16,
@@ -131,8 +132,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: Colors.deepPurpleAccent,
                               ),
                               onChanged: (newValue) {
+                                refreshList(newValue);
                                 setState(() {
-                                  dropdownValue = newValue!;
+                                  dropdownValue = newValue as String?;
                                 });
                               },
                               items: _listHocKy

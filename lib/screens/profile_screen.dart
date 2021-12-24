@@ -64,7 +64,7 @@ class ProfileScreen extends StatelessWidget {
                         fontSize: 25),
                   ),
                   SizedBox(height: 10.0,),
-                  Text("Ngày sinh: ${DateFormat("dd/MM/yyyy").format(currentStudent?["ngaySinh"] ?? DateTime.now())}", style: styleAtributeOfStudent,),
+                  Text("Ngày sinh: ${DateFormat("dd/MM/yyyy").format(DateTime.parse(currentStudent?["ngaySinh"]))}", style: styleAtributeOfStudent,),
                   SizedBox(height: 10.0,),
                   Text("MSSV: ${currentStudent?["maSinhVien"]}", style: styleAtributeOfStudent,),
                   SizedBox(height: 10.0,),

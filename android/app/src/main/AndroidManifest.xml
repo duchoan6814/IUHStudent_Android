@@ -6,6 +6,7 @@
 
     <application
         android:label="IUH Student"
+        android:name="androidx.multidex.MultiDexApplication"
         android:icon="@mipmap/ic_launcher">
 
 

@@ -29,6 +29,7 @@ class _ResultScreenState extends State<ResultScreen> {
 
   Future<dynamic> query() async {
     QueryOptions options = QueryOptions(
+      fetchPolicy: FetchPolicy.networkOnly,
       document: gql(getDiemThi),
     );
 
@@ -158,7 +159,7 @@ class _ResultScreenState extends State<ResultScreen> {
                         subject["diemCuoiKy"].toString(),
                         style: TextStyle(
                             fontSize: 17.0,
-                            color: subject["diemCuoiKy"] <= 5
+                            color: subject["diemCuoiKy"] == null ? ColorConfig.red : subject["diemCuoiKy"] <= 5
                                 ? ColorConfig.red
                                 : ColorConfig.character,
                             fontWeight: FontWeight.bold),
@@ -182,7 +183,7 @@ class _ResultScreenState extends State<ResultScreen> {
                       Text(
                         subject["diemTrungBinh"].toString(),
                         style: TextStyle(
-                          color: subject["diemTrungBinh"] <=5 ? ColorConfig.red : ColorConfig.character,
+                          color: subject["diemTrungBinh"] != null ? (subject["diemTrungBinh"] <= 5 ? ColorConfig.red : ColorConfig.character) : ColorConfig.red,
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold
                         ),
