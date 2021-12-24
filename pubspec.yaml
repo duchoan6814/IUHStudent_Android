@@ -37,7 +37,7 @@ dependencies:
   cached_network_image: ^3.1.0+1
   intl: ^0.17.0
   graphql_flutter: ^5.0.0
-  flutter_secure_storage: ^4.2.1
+  flutter_secure_storage: ^5.0.2
   fluttertoast: ^8.0.8
   stateprovider: ^0.5.1
   syncfusion_flutter_charts: ^19.3.48

@@ -55,9 +55,9 @@ class _RegisterObjectScreenState extends State<RegisterObjectScreen> {
            currentStep = step;
          });
         },
-        controlsBuilder: (context, {onStepCancel, onStepContinue}) {
+        controlsBuilder: (BuildContext context, ControlsDetails details) {
           return Row(
-            children: [
+            children: <Widget>[
               Container(
                 child: null,
               ),
