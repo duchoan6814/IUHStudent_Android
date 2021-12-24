@@ -37,7 +37,7 @@ class _ResultScreenState extends State<ResultScreen> {
     var _data = result?.data?["getDiemThi"]?["data"];
 
     setState(() {
-      resultData = _data?.map<bool>((item) => false).toList();
+      resultData = _data?.map<bool>((item) => true).toList();
     });
 
     return _data;
@@ -288,8 +288,6 @@ class _ResultScreenState extends State<ResultScreen> {
                                 children: _listSubject.map((item) {
                               int? _stt = _listSubject?.indexOf(item);
                               final _subject = item;
-
-                              print(_subject.toString());
 
                               return LineSubjectResult(
                                   onTap: handleOnTapScoreLine,

@@ -1,8 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.iuh_student">
-   <application
-        android:label="iuh_student"
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
+    <application
+        android:label="IUH Student"
         android:icon="@mipmap/ic_launcher">
+
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
